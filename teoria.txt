@@ -1,0 +1,7 @@
+npm init -> inicializa un proyecto de Node, instala el package.json
+npm init -y -> inicializa un proyecto de Node, aceptando todo por defecto
+npm i morgan -> instala el node_modeles y el package-lock.json
+npm i sequelize -> instala sequelize
+npm i express -> instala express
+npm i cors -> instala cors
+ 

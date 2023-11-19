@@ -1,16 +1,16 @@
 ## SkyScapeProject
 
-VISIÓN DE PROYECTO
+**VISIÓN DE PROYECTO**
 
 SkyScape busca proporcionar a los entusiastas de las actividades al aire libre una experiencia integral y organizada para explorar, planificar y disfrutar de diversas actividades. La visión de nuestro proyecto se centra en ofrecer a los usuarios las herramientas necesarias para descubrir nuevas actividades, gestionar su agenda y obtener información relevante sobre el clima en sus destinos seleccionados, conectando al usuario con la naturaleza a través de emocionantes experiencias en entornos naturales. 
 
-HISTORIAS DE USUARIOS
+**HISTORIAS DE USUARIOS**
 
 Usuarios potenciales
 Personas apasionadas por las actividades al aire libre, que buscan aventuras, conexión con la naturaleza y experiencias memorables. El usuario debería tener cierta capacidad física para poder realizar ciertas actividades que pueden tener un mayor grado de dificultad.
 
 
-Historias de usuarios
+*Historias de usuarios*
 User story 1:
 Persona que quiere disfrutar de una experiencia segura:
 Como usuario que planea una actividad al aire libre, quiero acceder a información meteorológica precisa y actualizada en el lugar y fecha de mi actividad, para tomar decisiones informadas y garantizar una experiencia segura y agradable.
