@@ -1,12 +1,12 @@
-# SkyScapeProject
+## SkyScapeProject
 
 VISIÓN DE PROYECTO
 
 SkyScape busca proporcionar a los entusiastas de las actividades al aire libre una experiencia integral y organizada para explorar, planificar y disfrutar de diversas actividades. La visión de nuestro proyecto se centra en ofrecer a los usuarios las herramientas necesarias para descubrir nuevas actividades, gestionar su agenda y obtener información relevante sobre el clima en sus destinos seleccionados, conectando al usuario con la naturaleza a través de emocionantes experiencias en entornos naturales. 
 
 HISTORIAS DE USUARIOS
-Usuarios potenciales
 
+Usuarios potenciales
 Personas apasionadas por las actividades al aire libre, que buscan aventuras, conexión con la naturaleza y experiencias memorables. El usuario debería tener cierta capacidad física para poder realizar ciertas actividades que pueden tener un mayor grado de dificultad.
 
 
@@ -34,4 +34,15 @@ Permitir la gestión flexible de horarios, la visualización y edición de activ
 Información Climática en Tiempo Real:
 Integrar un servicio de información meteorológica para proporcionar a los usuarios datos precisos sobre el clima en los lugares y fechas seleccionados para las actividades.
 Mostrar de manera clara y accesible la información climática relevante para que los usuarios puedan tomar decisiones informadas.
+
+### Members Endpoints
+**USUARIOS**
+
+| METHOD | ENDPOINT                  | TOKEN | ROLE  | DESCRIPTION                  | POST PARAMS                | RETURNS                              |
+| ------ | ------------------------- | ----- | ----- | ---------------------------- | -------------------------- | ------------------------------------ |
+| GET    | /users                  | YES   | Admin | Get all users                | -                          | [{ user }]                         |
+| GET    | /users/:userId          | YES   | Admin | Get one user                 | user_id                    | { user }                           |
+| PUT    | /users/:userId          | YES   | Admin | Update user                  | user_id                    | "User updated"                     |
+| POST   | /users                  | YES   | Admin | Create one user              | req.body                   | "User created"                     |
+| DELETE | /users/:userId          | YES   | Admin | Remove one user              | user_id                    | "User deleted"                     |
 
