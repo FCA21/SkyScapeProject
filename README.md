@@ -35,6 +35,12 @@ Información Climática en Tiempo Real:
 Integrar un servicio de información meteorológica para proporcionar a los usuarios datos precisos sobre el clima en los lugares y fechas seleccionados para las actividades.
 Mostrar de manera clara y accesible la información climática relevante para que los usuarios puedan tomar decisiones informadas.
 
+**ROLES DE USERS**
+
+Admin = ASBAT
+
+Usuarios comunes = USBAT
+
 ### Members Endpoints
 **USUARIOS**
 
