@@ -40,9 +40,82 @@ Mostrar de manera clara y accesible la información climática relevante para qu
 
 | METHOD | ENDPOINT                  | TOKEN | ROLE  | DESCRIPTION                  | POST PARAMS                | RETURNS                              |
 | ------ | ------------------------- | ----- | ----- | ---------------------------- | -------------------------- | ------------------------------------ |
-| GET    | /users                  | YES   | Admin | Get all users                | -                          | [{ user }]                         |
-| GET    | /users/:userId          | YES   | Admin | Get one user                 | user_id                    | { user }                           |
-| PUT    | /users/:userId          | YES   | Admin | Update user                  | user_id                    | "User updated"                     |
-| POST   | /users                  | YES   | Admin | Create one user              | req.body                   | "User created"                     |
-| DELETE | /users/:userId          | YES   | Admin | Remove one user              | user_id                    | "User deleted"                     |
+| GET    | /users                  | YES   | Admin | Get all users                  | -                          | [{ user }]                           |
+| GET    | /users/:userId          | YES   | Admin | Get one user                   | user_id                    | { user }                             |
+| PUT    | /users/:userId          | YES   | Admin | Update user                    | user_id                    | "User updated"                       |
+| POST   | /users                  | YES   | Admin | Create one user                | req.body                   | "User created"                       |
+| DELETE | /users/:userId          | YES   | Admin | Remove one user                | user_id                    | "User deleted"                       |
+
+**SENDERISMO**
+
+| METHOD | ENDPOINT                  | TOKEN | ROLE  | DESCRIPTION                  | POST PARAMS                | RETURNS                              |
+| ------ | ------------------------- | ----- | ----- | ---------------------------- | -------------------------- | ------------------------------------ |
+| GET    | /senderismo               | YES   | User  | Get all senderismo           | -                          | [{ senderismo }]                     |  
+| GET    | /senderismo/:senderismoId | YES   | User  | Get one senderismo           | senderismo_id              | { senderismo }                       |
+| PUT    | /senderismo/:animalId     | YES   | Admin | Update senderismo            | senderismo_id              | "senderismo updated"                 |
+| POST   | /senderismo               | YES   | Admin | Create one senderismo        | req.body                   | "senderismo created"                 |
+| DELETE | /senderismo/:senderismoId | YES   | Admin | Remove one senderismo        | senderismo_id              | "senderismo deleted"                 |
+
+**CICLISMO**
+
+| METHOD | ENDPOINT                  | TOKEN | ROLE  | DESCRIPTION                  | POST PARAMS                | RETURNS                              |
+| ------ | ------------------------- | ----- | ----- | ---------------------------- | -------------------------- | ------------------------------------ |
+| GET    | /ciclismo                 | YES   | User  | Get all ciclismo             | -                          | [{ ciclismo }]                       |  
+| GET    | /ciclismo/:ciclismoId     | YES   | User  | Get one ciclismo             | ciclismo_id                | { ciclismo }                         |
+| PUT    | /ciclismo/:ciclismoId     | YES   | Admin | Update ciclismo              | ciclismo_id                | "ciclismo updated"                   |
+| POST   | /ciclismo                 | YES   | Admin | Create one ciclismo          | req.body                   | "ciclismo created"                   |
+| DELETE | /ciclismo/:ciclismoId     | YES   | Admin | Remove one ciclismo          | ciclismo_id                | "ciclismo deleted"                   |
+
+**CAMPING**
+
+| METHOD | ENDPOINT                  | TOKEN | ROLE  | DESCRIPTION                  | POST PARAMS                | RETURNS                              |
+| ------ | ------------------------- | ----- | ----- | ---------------------------- | -------------------------- | ------------------------------------ |
+| GET    | /camping                  | YES   | User  | Get all camping              | -                          | [{ camping }]                        |  
+| GET    | /camping/:campingId       | YES   | User  | Get one camping              | camping_id                 | { camping }                          |
+| PUT    | /camping/:campingId       | YES   | Admin | Update camping               | camping_id                 | "camping updated"                    |
+| POST   | /camping                  | YES   | Admin | Create one camping           | req.body                   | "camping created"                    |
+| DELETE | /camping/:campingId       | YES   | Admin | Remove one camping           | camping_id                 | "camping deleted"                    |
+
+**PLAYA**
+
+| METHOD | ENDPOINT                  | TOKEN | ROLE  | DESCRIPTION                  | POST PARAMS                | RETURNS                              |
+| ------ | ------------------------- | ----- | ----- | ---------------------------- | -------------------------- | ------------------------------------ |
+| GET    | /playa                    | YES   | User  | Get all playa                | -                          | [{ playa }]                          |  
+| GET    | /playa/:playaId           | YES   | User  | Get one playa                | playa_id                   | { playa }                            |
+| PUT    | /playa/:playaId           | YES   | Admin | Update playa                 | playa_id                   | "playa updated"                      |
+| POST   | /playa                    | YES   | Admin | Create one playa             | req.body                   | "playa created"                      |
+| DELETE | /playa/:playaId           | YES   | Admin | Remove one playa             | playa_id                   | "playa deleted"                      |
+
+**OBSERVACION_ESTRELLAS**
+
+| METHOD | ENDPOINT                           | TOKEN | ROLE  | DESCRIPTION                         | POST PARAMS                | RETURNS                                    |
+| ------ | ---------------------------------- | ----- | ----- | ----------------------------------- | -------------------------- | ------------------------------------------ |
+| GET    | /observacionEstrellas               | YES   | User  | Get all observacionEstrellas       | -                          | [{ observacionEstrellas }]                  |  
+| GET    | /observacionEstrellas/:observacionId| YES  | User  | Get one observacionEstrellas        | observacion_id             | { observacionEstrellas }                    |
+| PUT    | /observacionEstrellas/:observacionId| YES  | Admin | Update observacionEstrellas         | observacion_id             | "observacionEstrellas updated"              |
+| POST   | /observacionEstrellas               | YES   | Admin | Create one observacionEstrellas    | req.body                   | "observacionEstrellas created"              |
+| DELETE | /observacionEstrellas/:observacionId| YES  | Admin | Remove one observacionEstrellas     | observacion_id             | "observacionEstrellas deleted"              |
+
+**BUCEO**
+
+| METHOD | ENDPOINT            | TOKEN | ROLE  | DESCRIPTION                  | POST PARAMS        | RETURNS                |
+| ------ | ------------------- | ----- | ----- | ---------------------------- | ------------------ | ---------------------- |
+| GET    | /buceo              | YES   | User  | Get all buceo                | -                  | [{ buceo }]            |  
+| GET    | /buceo/:buceoId     | YES   | User  | Get one buceo                | buceo_id           | { buceo }              |
+| PUT    | /buceo/:buceoId     | YES   | Admin | Update buceo                 | buceo_id           | "buceo updated"        |
+| POST   | /buceo              | YES   | Admin | Create one buceo             | req.body           | "buceo created"        |
+| DELETE | /buceo/:buceoId     | YES   | Admin | Remove one buceo             | buceo_id           | "buceo deleted"        |
+
+**SURF**
+
+| METHOD | ENDPOINT          | TOKEN | ROLE  | DESCRIPTION                | POST PARAMS        | RETURNS              |
+| ------ | ----------------- | ----- | ----- | -------------------------- | ------------------ | -------------------- |
+| GET    | /surf            | YES   | User   | Get all surf               | -                  | [{ surf }]           |  
+| GET    | /surf/:surfId    | YES   | User   | Get one surf               | surf_id            | { surf }             |
+| PUT    | /surf/:surfId    | YES   | Admin  | Update surf                | surf_id            | "surf updated"       |
+| POST   | /surf            | YES   | Admin  | Create one surf            | req.body           | "surf created"       |
+| DELETE | /surf/:surfId    | YES   | Admin  | Remove one surf            | surf_id            | "surf deleted"       |
+
+
+
 
