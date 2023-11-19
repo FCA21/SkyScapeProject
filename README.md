@@ -23,7 +23,7 @@ User story 3:
 Persona amante del camping:
 Usuario amante de las acampadas que quiere disfrutar de  un fin de semana en un camping de la isla. Busca unos días frescos huyendo del calor de la costa, por ello usa la web para conocer la predicción del tiempo en el camping de Bailico, Tejeda.
 
-OBJETIVOS PRINCIPALES
+**OBJETIVOS PRINCIPALES**
 
 Registro y Acceso a Actividades:
 Permitir a los usuarios registrarse de manera sencilla y acceder a una amplia gama de actividades al aire libre disponibles.
