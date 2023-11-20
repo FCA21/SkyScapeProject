@@ -4,4 +4,5 @@ npm i morgan -> instala el node_modeles y el package-lock.json
 npm i sequelize -> instala sequelize
 npm i express -> instala express
 npm i cors -> instala cors
- 
+npm i bcrypt -> instala un paquete para la encriptacion de las contraseñas
+
