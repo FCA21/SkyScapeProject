@@ -8,8 +8,8 @@ const Usuario_Actividad = sequelize.define('usuario_actividad',
         allowNull: false 
     },
     estado: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     }
 }, {
     timestamps: false

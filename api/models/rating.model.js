@@ -5,7 +5,7 @@ const Rating = sequelize.define(
   "rating",
   {
     rating: {
-      type: DataTypes.DECIMAL(4, 2), 
+      type: DataTypes.DECIMAL(2, 1), 
       allowNull: false, 
       validate: {
         min: 0,

@@ -1,27 +1,27 @@
 const jwt = require("jsonwebtoken");
-const User = require("../models/usuario.model.js")
+const Usuario = require("../models/usuario.model.js")
 const bcrypt = require("bcrypt");
 require("dotenv").config();
 
 async function login(req, res) {
   try {
-    const user = await User.findOne({
+    const usuario = await Usuario.findOne({
       where: {
         email: req.body.email,
       },
     });
 
     if (!usuario)
-      return res.status(404).send("Error: Email or Password incorrect");
+      return res.status(404).send("Error: Email o Clave incorrecta");
 
-    const comparePass = bcrypt.compareSync(req.body.password, usuario.password);
+    const comparePass = bcrypt.compareSync(req.body.clave, usuario.clave);
 
     if (comparePass) {
       const payload = { email: usuario.email };
       const token = jwt.sign(payload, process.env.SECRET, { expiresIn: "1h" });
-      return res.status(200).send({ token: token, rol: user.rol });
+      return res.status(200).send({ token: token, rol: usuario.rol });
     } else {
-      return res.status(404).send("Error: Email or Password incorrect");
+      return res.status(404).send("Error: Email o Clave incorrecta");
     }
   } catch (error) {
     return res.status(500).send(error.message);
@@ -30,15 +30,15 @@ async function login(req, res) {
 
 async function signup(req, res) {
   const saltRounds = bcrypt.genSaltSync(parseInt(process.env.SALTROUNDS));
-  const hashedPassword = bcrypt.hashSync(req.body.password, saltRounds);
-  req.body.password = hashedPassword;
+  const hashedClave = bcrypt.hashSync(req.body.clave, saltRounds);
+  req.body.clave = hashedClave;
   try {
-    const user = await User.create(req.body);
-    const payload = { email: user.email };
+    const usuario = await Usuario.create(req.body);
+    const payload = { email: usuario.email };
     const token = jwt.sign(payload, process.env.SECRET, { expiresIn: "1h" });
     return res.status(200).json({ token });
   } catch (error) {
-    return res.status(500).send("Email duplicated");
+    return res.status(500).send("Email duplicado");
   }
 }
 
