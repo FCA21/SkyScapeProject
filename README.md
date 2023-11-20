@@ -11,6 +11,7 @@ Personas apasionadas por las actividades al aire libre, que buscan aventuras, co
 
 
 *Historias de usuarios*
+
 User story 1:
 Persona que quiere disfrutar de una experiencia segura:
 Como usuario que planea una actividad al aire libre, quiero acceder a información meteorológica precisa y actualizada en el lugar y fecha de mi actividad, para tomar decisiones informadas y garantizar una experiencia segura y agradable.
