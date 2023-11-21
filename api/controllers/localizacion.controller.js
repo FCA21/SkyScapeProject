@@ -10,7 +10,7 @@ async function getAllLocalizaciones(req, res) {
   }
 }
 
-async function getLocalizacionById(req, res) {
+async function getOneLocalizacion(req, res) {
   try {
     const localizacion = await Localizacion.findByPk(req.params.id);
     if (!localizacion) {
@@ -61,7 +61,7 @@ async function deleteLocalizacion(req, res) {
 
 module.exports = {
     getAllLocalizaciones,
-    getLocalizacionById,
+    getOneLocalizacion,
     createLocalizacion,
     updateLocalizacion,
     deleteLocalizacion

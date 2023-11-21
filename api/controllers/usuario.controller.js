@@ -1,4 +1,6 @@
-const Usuario = require("../models/usuario.model");
+const Actividad = require('../models/actividad.model');
+const Usuario = require('../models/usuario.model');
+const bcrypt = require('bcrypt');
 
 async function getAllUsuarios(req, res) {
   try {
@@ -37,65 +39,105 @@ async function getPerfil(req, res) {
   }
 }
 
-async function createUser(req, res) {
+async function createUsuario(req, res) {
   const saltRounds = bcrypt.genSaltSync(parseInt(process.env.SALTROUNDS));
-  const hashedPassword = bcrypt.hashSync(req.body.password, saltRounds);
-  req.body.password = hashedPassword;
+  const hashedClave = bcrypt.hashSync(req.body.clave, saltRounds);
+  req.body.clave = hashedClave;
   try {
-    const user = await User.create(req.body);
-    return res.status(200).send('User created');
+    const usuario = await Usuario.create(req.body);
+    return res.status(200).send('Usuario creado');
   } catch (error) {
     return res.status(402).send(error.message);
   }
 }
 
-async function updateUser(req, res) {
+async function updateUsuario(req, res) {
   try {
-    const user = await User.update(req.body, {
+    const usuario = await Usuario.update(req.body, {
       where: { id: req.params.id },
     });
-    return res.status(200).json(user);
+    return res.status(200).json(usuario);
   } catch (error) {
     return res.status(402).send(error.message);
   }
 }
 
-async function setTask(req, res) {
+async function setActividad(req, res) {
   try {
-    const task = await Task.findByPk(req.body.taskId);
-    const user = await User.findByPk(req.body.userId, {
-      include: Task,
+    const actividad = await Actividad.findByPk(req.body.actividadId);
+    const usuario = await Usuario.findByPk(req.body.usuarioId, {
+      include: Actividad,
     });
-    if (user.role != 'volunteer') {
-      return res.status(501).send('This is not a volunteer');
+
+    const actividadesPendientes = usuario.actividad.filter(function(act) {
+      return act.estado ==='pendiente'
+    })
+    if (actividadesPendientes.length >= 4) {
+      return res.status(501).send('Tienes muchas actividades pendientes');
     }
-    if (user.tasks.length >= 2) {
-      return res.status(501).send('This volunteer has many of tasks');
-    }
-    await task.setUser(user);
-    return res.status(200).send('Task added');
+    await actividad.setUsuario(usuario);
+    return res.status(200).send('Actividad añadida');
   } catch (error) {
     return res.status(500).send(error.message);
   }
 }
 
-async function deleteUser(req, res) {
+async function setFavorito(req, res) {
   try {
-    const user = await User.destroy({
+    const usuario = await Usuario.findByPk(usuarioId);
+    const actividad = await Actividad.findByPk(actividadId);
+    await usuario.addUserFav(actividad);
+    return res.status(200).send('Actividad añadida a favoritos');
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+}
+
+async function removeFavorito(req, res) {
+  try {
+    const usuario = await Usuario.findByPk(usuarioId);
+    const actividad = await Actividad.findByPk(actividadId);
+    await usuario.removeUserFav(actividad);
+    return res.status(200).send('Actividad eliminada a favoritos');
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+}
+
+
+async function setRate(req, res) {
+  try {
+    const usuario = await Usuario.findByPk(usuarioId);
+    const actividad = await Actividad.findByPk(actividadId);
+    await usuario.addUserRate(actividad);
+    return res.status(200).send('Rate añadido a la actividad');
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+}
+
+async function deleteUsuario(req, res) {
+  try {
+    const usuario = await Usuario.destroy({
       where: { id: req.params.id },
     });
-    return res.status(200).json({ text: 'User removed', user: user });
+    return res
+      .status(200)
+      .json({ text: 'Usuario eliminado', usuario: usuario });
   } catch (error) {
     return res.status(500).send(error.message);
   }
 }
 
 module.exports = {
-  getAllUsers,
-  getOneUser,
-  createUser,
-  updateUser,
-  deleteUser,
-  getProfile,
-  setTask,
+  getAllUsuarios,
+  getOneUsuario,
+  createUsuario,
+  updateUsuario,
+  deleteUsuario,
+  getPerfil,
+  setActividad,
+  setFavorito,
+  setRate,
+  removeFavorito
 };

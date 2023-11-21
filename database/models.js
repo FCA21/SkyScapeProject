@@ -17,10 +17,7 @@ function setRelations() {
     Usuario.belongsToMany(Actividad, { through: Usuario_Actividad });
     Actividad.belongsToMany(Usuario, { through: Usuario_Actividad });
 
-    Usuario.belongsToMany(Actividad, {
-      through: 'usuario_favs',
-      as: 'userFav',
-    });
+    Usuario.belongsToMany(Actividad, {through: 'usuario_favs',as: 'userFav',});
     Actividad.belongsToMany(Usuario, { through: 'usuario_favs', as: 'actFav' });
 
     Usuario.belongsToMany(Actividad, { through: Rating, as: 'userRate' });
