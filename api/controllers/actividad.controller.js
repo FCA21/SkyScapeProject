@@ -24,9 +24,37 @@ async function getOneActividad(req, res) {
 
 //cuando se utilice el postman para crear un animal importante poner body y JSON
 async function createActividad(req, res) {
+    
   try {
-    const actividad = await Animal.create(req.body);
-    return res.status(200).send(actividad);
+    
+    const actividad = await Actividad.create(req.body);
+    return res.status(200).send("actividad creada: ", { actividad });
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+}
+
+async function createActividadyLoc(req, res) {
+  const act = {
+    checkAdmindad: req.body.nombre_actividad,
+    dificultad: req.body.dificultad,
+    distancia: req.body.distancia,
+    tiempo_estimado: req.body.tiempo_estimado,
+    servicios_disponibles: req.body.servicios_disponibles,
+    profundiad_maxima: req.body.profundiad_maxima,
+  };
+  const loc = {
+    municipio: req.body.municipio,
+    latitud: req.body.latitud,
+    longitud: req.body.longitud,
+  };
+  try {
+    const actividad = await Actividad.create(act);
+    const Localizacion = await Localizacion.create(loc);
+    await actividad.setLocalizacion(localizacion);
+    return res
+      .status(200)
+      .send('actividad creada: ', { actividad, localizacion });
   } catch (error) {
     return res.status(500).send(error.message);
   }
@@ -34,7 +62,7 @@ async function createActividad(req, res) {
 
 async function updateActividad(req, res) {
   try {
-    const actividad = await Animal.update(req.body, {
+    const actividad = await Actividad.update(req.body, {
       where: {
         id: req.params.id,
       },
