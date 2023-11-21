@@ -14,7 +14,7 @@ async function login(req, res) {
     if (!usuario)
       return res.status(404).send("Error: Email o Clave incorrecta");
 
-    const comparePass = bcrypt.compareSync(req.body.clave, usuario.clave);
+    const comparePass = bcrypt.compareSync(req.body.password, usuario.password);
 
     if (comparePass) {
       const payload = { email: usuario.email };
@@ -30,8 +30,8 @@ async function login(req, res) {
 
 async function signup(req, res) {
   const saltRounds = bcrypt.genSaltSync(parseInt(process.env.SALTROUNDS));
-  const hashedClave = bcrypt.hashSync(req.body.clave, saltRounds);
-  req.body.clave = hashedClave;
+  const hashedPass = bcrypt.hashSync(req.body.password, saltRounds);
+  req.body.password = hashedPass;
   try {
     const usuario = await Usuario.create(req.body);
     const payload = { email: usuario.email };

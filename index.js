@@ -19,7 +19,7 @@ function launchServer() {
     .use(cors())
     .use(morgan("dev"))
     .use(express.json())
-    //.use("/api", require("./api/routes/index"))
+    .use("/api", require("./api/routes/index"))
     .listen(process.env.SRV_PORT, () => {
       console.log("Servidor de express a la escucha en el puerto " + process.env.SRV_PORT);
     });

@@ -41,8 +41,8 @@ async function getPerfil(req, res) {
 
 async function createUsuario(req, res) {
   const saltRounds = bcrypt.genSaltSync(parseInt(process.env.SALTROUNDS));
-  const hashedClave = bcrypt.hashSync(req.body.clave, saltRounds);
-  req.body.clave = hashedClave;
+  const hashedPass = bcrypt.hashSync(req.body.password, saltRounds);
+  req.body.password = hashedPass;
   try {
     const usuario = await Usuario.create(req.body);
     return res.status(200).send('Usuario creado');
@@ -123,7 +123,7 @@ async function deleteUsuario(req, res) {
     });
     return res
       .status(200)
-      .json({ text: 'Usuario eliminado', usuario: usuario });
+      .json({ text: 'Usuario eliminado' });
   } catch (error) {
     return res.status(500).send(error.message);
   }
