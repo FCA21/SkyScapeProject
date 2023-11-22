@@ -12,7 +12,7 @@ async function getAllActividades(req, res) {
 
 async function getOneActividad(req, res) {
   try {
-    const actividad = await Animal.findByPk(req.params.id);
+    const actividad = await Actividad.findByPk(req.params.id);
     if (!activdad) {
       res.status(500).send('Actividad no encontrada');
     }
@@ -24,11 +24,9 @@ async function getOneActividad(req, res) {
 
 //cuando se utilice el postman para crear un animal importante poner body y JSON
 async function createActividad(req, res) {
-    
   try {
-    
     const actividad = await Actividad.create(req.body);
-    return res.status(200).send("actividad creada: ", { actividad });
+    return res.status(200).json({ actividad });
   } catch (error) {
     return res.status(500).send(error.message);
   }
@@ -67,40 +65,48 @@ async function updateActividad(req, res) {
         id: req.params.id,
       },
     });
-    return res.status(200).json(actividad);
+    return res.status(200).send("Actividad modificada");
   } catch (error) {
     return res.status(500).send(error.message);
   }
 }
 
-async function setLocalizacion(req, res) {deleteUser;
-    try {
-        const actividad = await Actividad.findByPk(req.body.actividadId)
-        await actividad.addLocalizacion(req.body.localizacionId)
-        res.status(200).json(actividad)
-    } catch (error) {
-        res.status(500).send(error.message)
-    }
+async function setLocalizacion(req, res) {
+  try {
+    const actividad = await Actividad.findByPk(req.body.actividadId);
+    await actividad.addLocalizacion(req.body.localizacionId);
+    res.status(200).json(actividad);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 }
 
 async function deleteActividad(req, res) {
-    try {
-        const actividad = await Animal.destroy({
-            where: {
-                id: req.params.id
-            },
-        })
-        res.status(500).json({ text : 'Actividad eliminada', actividad:actividad })
-    } catch (error) {
-        return res.status(500).send(error.message)
+  try {
+    const actividad = await Actividad.findByPk(req.params.id);
+
+    if (!actividad) {
+      return res.status(404).send('Actividad no encontrada');
     }
+
+    await Actividad.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+
+    return res.status(200).send('Actividad eliminada');
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
 }
 
+
 module.exports = {
-    getAllActividades,
-    getOneActividad,
-    createActividad,
-    updateActividad,
-    deleteActividad,
-    setLocalizacion
-}
+  getAllActividades,
+  getOneActividad,
+  createActividad,
+  updateActividad,
+  deleteActividad,
+  setLocalizacion,
+};

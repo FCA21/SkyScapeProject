@@ -19,6 +19,7 @@ async function login(req, res) {
     if (comparePass) {
       const payload = { email: usuario.email };
       const token = jwt.sign(payload, process.env.SECRET, { expiresIn: "1h" });
+      console.log(token)
       return res.status(200).send({ token: token, rol: usuario.rol });
     } else {
       return res.status(404).send("Error: Email o Clave incorrecta");

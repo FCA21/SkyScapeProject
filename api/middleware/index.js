@@ -4,6 +4,7 @@ const Usuario = require('../models/usuario.model.js');
 function checkAuth(req, res, next) {
   if (!req.headers.authorization)
     return res.status(404).send('Token no encontrado');
+  console.log(req.headers.authorization);
   jwt.verify(
     req.headers.authorization,
     process.env.SECRET,

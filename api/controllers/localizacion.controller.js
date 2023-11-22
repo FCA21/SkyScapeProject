@@ -40,7 +40,7 @@ async function updateLocalizacion(req, res) {
         id: req.params.id,
       },
     });
-    return res.status(200).json(localizacion);
+    return res.status(200).send("Localizacion modificada");
   } catch (error) {
     res.status(500).send(error.message);
   }
@@ -48,15 +48,22 @@ async function updateLocalizacion(req, res) {
 
 async function deleteLocalizacion(req, res) {
   try {
-    const localizacion = await Localizacion.destroy({
+    const localizacion = await Localizacion.findByPk(req.params.id);
+
+    if (!localizacion) {
+      return res.status(404).send('Localizacion no encontrada');
+    }
+
+    await Localizacion.destroy({
       where: {
         id: req.params.id,
       },
     });
-    res
-      .status(500)
-      .json({ text: "Localizacion borrada", localizacion: localizacion });
-  } catch (error) {}
+
+    return res.status(200).send('Localizacion eliminada');
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
 }
 
 module.exports = {

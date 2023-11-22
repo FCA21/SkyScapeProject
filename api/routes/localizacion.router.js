@@ -10,9 +10,8 @@ const {
   checkAdmin,
 } = require('../middleware/index');
 
-const router = require('express').Router(); //le indicamos que vamos a usar el router de express para que maneje las peticiones
+const router = require('express').Router(); 
 
-//definimos CRUD basico de host_fam
 router.get('/', checkAuth, getAllLocalizaciones);
 router.get('/:id', checkAuth, getOneLocalizacion);
 router.post('/', checkAuth, checkAdmin, createLocalizacion);

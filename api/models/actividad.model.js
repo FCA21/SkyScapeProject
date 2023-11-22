@@ -2,10 +2,19 @@ const { sequelize } = require('../../database/index.js')
 const { DataTypes } = require('sequelize')
 
 
-const Actividad = sequelize.define("actividad",
+const Actividad = sequelize.define(
+  'actividad',
   {
     categoria: {
-      type: DataTypes.ENUM("senderismo", "ciclismo", "camping", "playa", "surf", "buceo", "observacion_estrellas"),
+      type: DataTypes.ENUM(
+        'senderismo',
+        'ciclismo',
+        'camping',
+        'playa',
+        'surf',
+        'buceo',
+        'observacion_estrellas'
+      ),
       allowNull: false,
     },
     nombre_actividad: {
@@ -14,15 +23,15 @@ const Actividad = sequelize.define("actividad",
     },
     dificultad: {
       type: DataTypes.STRING(50),
-      allowNull: true, 
+      allowNull: true,
     },
     distancia: {
       type: DataTypes.DECIMAL(10, 2),
-      allowNull: true, 
+      allowNull: true,
     },
     tiempo_estimado: {
       type: DataTypes.TIME,
-      allowNull: true, 
+      allowNull: true,
     },
     servicios_disponibles: {
       type: DataTypes.STRING(200),
@@ -30,15 +39,15 @@ const Actividad = sequelize.define("actividad",
     },
     actividades_disponibles: {
       type: DataTypes.STRING(200),
-      allowNull: true, 
+      allowNull: true,
     },
     profundidad_maxima: {
       type: DataTypes.INTEGER,
-      allowNull: true, 
+      allowNull: true,
     },
   },
   {
-    timestamps: false
+    timestamps: false,
   }
 ); 
 
