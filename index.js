@@ -9,8 +9,8 @@ require("dotenv").config();
 //para no tener las funciones sueltas hacemos una funcion para meterlas todas
 async function connectDB() {
   await checkDB(); //chequeamos conexion con la BD
-  //setRelations();
-  await syncModels(); //sincronizamos los cambios con la BD
+  setRelations();
+  await syncModels("alter"); //sincronizamos los cambios con la BD
 }
 
 //creamos function para lanzar el servidor

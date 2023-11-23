@@ -11,7 +11,7 @@ const { checkAuth, checkAdmin } = require('../middleware/index');
 const router = require('express').Router();
 
 
-router.get('/', getAllActividades);
+router.get('/', checkAuth, getAllActividades);
 router.get('/:id', checkAuth, getOneActividad);
 router.post('/', checkAuth, checkAdmin, createActividad);
 router.put('/localizacion', checkAuth, checkAdmin, setLocalizacion);

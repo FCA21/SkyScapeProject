@@ -9,20 +9,13 @@ const Localizacion = sequelize.define(
       allowNull: false,
     },
     latitud: {
-      type: DataTypes.DECIMAL(8, 6), 
-      allowNull: false,
-      validate: {
-        min: -90, 
-        max: 90, 
+      type: DataTypes.STRING, 
+      allowNull: false, 
       },
-    },
     longitud: {
-      type: DataTypes.DECIMAL(8, 6), 
-      validate: {
-        min: -180, 
-        max: 180, 
+      type: DataTypes.STRING, 
+      allowNull: false
     },
-  },
 }, 
   {
     timestamps: false,

@@ -19,7 +19,6 @@ async function login(req, res) {
     if (comparePass) {
       const payload = { email: usuario.email };
       const token = jwt.sign(payload, process.env.SECRET, { expiresIn: "1h" });
-      console.log(token)
       return res.status(200).send({ token: token, rol: usuario.rol });
     } else {
       return res.status(404).send("Error: Email o Clave incorrecta");
@@ -34,6 +33,13 @@ async function signup(req, res) {
   const hashedPass = bcrypt.hashSync(req.body.password, saltRounds);
   req.body.password = hashedPass;
   try {
+
+       const Usernameexistente = await Usuario.findOne({
+         where: { username: req.body.username },
+       });
+       if (Usernameexistente) {
+         return res.status(400).send('El username ya está en uso');
+       }
     const usuario = await Usuario.create(req.body);
     const payload = { email: usuario.email };
     const token = jwt.sign(payload, process.env.SECRET, { expiresIn: "1h" });

@@ -25,7 +25,7 @@ function checkAdmin(req, res, next) {
   if (res.locals.usuario.rol === 'admin') {
     next();
   } else {
-    return res.status(404).send('No podrás pasar');
+    return res.status(404).send('A dónde vas Fittipaldi, no eres admin');
   }
 }
 

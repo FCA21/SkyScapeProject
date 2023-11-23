@@ -1,6 +1,5 @@
-const { sequelize } = require('../../database/index.js')
-const { DataTypes } = require('sequelize')
-
+const { sequelize } = require('../../database/index.js');
+const { DataTypes } = require('sequelize');
 
 const Actividad = sequelize.define(
   'actividad',
@@ -25,10 +24,20 @@ const Actividad = sequelize.define(
       type: DataTypes.STRING(50),
       allowNull: true,
     },
-    distancia: {
-      type: DataTypes.DECIMAL(10, 2),
+    distancia_km: {
+      type: DataTypes.DECIMAL(5, 2),
       allowNull: true,
     },
+    localizacion_inicio: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+
+    localizacion_final: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+
     tiempo_estimado: {
       type: DataTypes.TIME,
       allowNull: true,
@@ -49,6 +58,6 @@ const Actividad = sequelize.define(
   {
     timestamps: false,
   }
-); 
+);
 
 module.exports = Actividad;
