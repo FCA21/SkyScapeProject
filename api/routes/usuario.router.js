@@ -9,6 +9,7 @@ const {
   removeFavorito,
   updateUsuario,
   deleteUsuario,
+  marcarActividadRealizada
 } = require('../controllers/usuario.controller');
 const { checkAuth, checkAdmin } = require('../middleware');
 
@@ -17,6 +18,7 @@ const router = require('express').Router();
 //definimos CRUD basico de user
 router.get('/', checkAuth, checkAdmin, getAllUsuarios);
 router.get('/getPerfil', checkAuth, getPerfil);
+router.put('/estado', checkAuth, marcarActividadRealizada);
 router.get('/:id', checkAuth, checkAdmin, getOneUsuario);
 router.post('/', checkAuth, checkAdmin, createUsuario);
 router.post('/actividad', checkAuth, setActividad);

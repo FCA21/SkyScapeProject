@@ -64,20 +64,61 @@ async function updateUsuario(req, res) {
 
 async function setActividad(req, res) {
   try {
+    const usuario = await Usuario.findByPk(res.locals.usuario.id, {
+      include: [Actividad]
+    });
     const actividad = await Actividad.findByPk(req.body.actividadId);
-    const usuario = await Usuario.findByPk(res.locals.usuario.id);
 
-    if (usuario.actividad > 0) {
-      const actividadesPendientes = usuario.actividad.filter(function (act) {
-        return act.estado === 'pendiente';
-      });
-      if (actividadesPendientes.length >= 4) {
-        return res.status(501).send('Tienes muchas actividades pendientes');
-      }
+    if (!actividad) {
+      return res.status(404).send('La actividad no existe');
     }
+
+    const actividadesPendientes = await Usuario_actividad.findAll({
+      where: {
+        usuarioId: res.locals.usuario.id,
+        estado: false,
+      },
+    });
+
+    if (actividadesPendientes.length >= 3) {
+      return res.status(501).send('Tienes muchas actividades pendientes');
+    }
+
+     const actividadesUsuario = await usuario.getActividads({
+       where: {
+         id: actividad.id,
+       },
+     });
+     if (actividadesUsuario.length > 0) {
+       return res.status(400).send('Tienes esta actividad pendiente');
+     }
     await usuario.addActividad(actividad);
 
     return res.status(200).send('Actividad añadida');
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+}
+
+async function marcarActividadRealizada(req, res) {
+  try {
+    const usuario = await Usuario.findByPk(res.locals.usuario.id);
+    const actividad = await Actividad.findByPk(req.body.actividadId);
+    if (!actividad) {
+      return res.status(404).send('La actividad no existe');
+    }
+
+    const userActividad = await Usuario_actividad.findOne({
+      where: {
+        usuarioId: usuario.id,
+        actividadId: actividad.id,
+      },
+    });
+
+    userActividad.estado = true;
+    await userActividad.save();
+
+    return res.status(200).send('Actividad marcada como realizada');
   } catch (error) {
     return res.status(500).send(error.message);
   }
@@ -115,7 +156,7 @@ async function setRate(req, res) {
         actividadId: actividad.id,
       },
     });
-    if ( userActividad.estado == true) {
+    if (userActividad.estado == true) {
       await usuario.addUserRate(actividad, {
         through: { rating: req.body.rating },
       });
@@ -123,7 +164,7 @@ async function setRate(req, res) {
     } else {
       return res
         .status(403)
-        .send("No puedes valorar esta actividad hasta que no la realices");
+        .send('No puedes valorar esta actividad hasta que no la realices');
     }
   } catch (error) {
     return res.status(500).send(error.message);
@@ -152,4 +193,5 @@ module.exports = {
   setFavorito,
   setRate,
   removeFavorito,
+  marcarActividadRealizada,
 };

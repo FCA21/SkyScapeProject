@@ -27,7 +27,7 @@ async function checkDB() {
 //sincronizamos modelos 
 async function syncModels() {
     try {
-        await sequelize.sync(/* { alter: true } */);
+        await sequelize.sync({ /* alter: true */ });
         console.log('Modelos sincronizaos')
     } catch (error) {
         console.log(error)

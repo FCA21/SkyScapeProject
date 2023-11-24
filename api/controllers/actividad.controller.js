@@ -13,7 +13,7 @@ async function getAllActividades(req, res) {
 async function getOneActividad(req, res) {
   try {
     const actividad = await Actividad.findByPk(req.params.id);
-    if (!activdad) {
+    if (!actividad) {
       res.status(500).send('Actividad no encontrada');
     }
     return res.status(200).json(actividad);
@@ -22,11 +22,10 @@ async function getOneActividad(req, res) {
   }
 }
 
-//cuando se utilice el postman para crear un animal importante poner body y JSON
 async function createActividad(req, res) {
   try {
     const actividad = await Actividad.create(req.body);
-    return res.status(200).json({ actividad });
+    return res.status(200).send("Actividad añadida");
   } catch (error) {
     return res.status(500).send(error.message);
   }
@@ -74,6 +73,7 @@ async function updateActividad(req, res) {
 async function setLocalizacion(req, res) {
   try {
     const actividad = await Actividad.findByPk(req.body.actividadId);
+    
     await actividad.addLocalizacion(req.body.localizacionId);
     res.status(200).json(actividad);
   } catch (error) {
