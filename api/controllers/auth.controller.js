@@ -43,7 +43,7 @@ async function signup(req, res) {
     const usuario = await Usuario.create(req.body);
     const payload = { email: usuario.email };
     const token = jwt.sign(payload, process.env.SECRET, { expiresIn: "1h" });
-    return res.status(200).json({ token });
+    return res.status(200).json({ token: token, rol: usuario.rol });
   } catch (error) {
     return res.status(500).send("Email duplicado");
   }

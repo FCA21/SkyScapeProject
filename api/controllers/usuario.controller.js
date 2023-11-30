@@ -28,7 +28,17 @@ async function getOneUsuario(req, res) {
 
 async function getPerfil(req, res) {
   try {
-    const usuario = await Usuario.findByPk(res.locals.usuario.id);
+    const usuario = await Usuario.findByPk(res.locals.usuario.id, {
+      include: [
+        {
+          model: Actividad,
+          as: 'userFav',
+        },
+        {
+          model: Actividad
+        }
+      ],
+    });
     if (!usuario) {
       res.status(500).send('Usuario no encontrado');
     }

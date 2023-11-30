@@ -10,6 +10,7 @@ const Usuario = sequelize.define("usuario",
 
   age: {
     type:DataTypes.INTEGER
+    
   },
 
   email: {

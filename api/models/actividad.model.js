@@ -54,6 +54,9 @@ const Actividad = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: true,
     },
+    image_url: {
+      type: DataTypes.STRING,
+    },
   },
   {
     timestamps: false,
